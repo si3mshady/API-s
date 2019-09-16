@@ -1,0 +1,16 @@
+version: '3'
+services:
+  api:
+    environment:
+      - ACCESS_KEY=${AWS_ACCESS_KEY_ID}
+      - SECRET_KEY=${AWS_SECRET_ACCESS_KEY}
+    depends_on:
+      - mdb
+    build: './api'
+    ports:
+      - '5000:5000'
+    links:
+      - mdb
+  mdb:
+    restart: always
+    build: './mongo'
