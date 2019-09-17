@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment-si3mshady
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      api: k8
+  template:
+    metadata:
+      labels:
+        api: k8
+    spec:
+      containers:
+        - name: si3mshady-light-k8
+          image: si3mshady/k8light:1
+          ports:
+            - containerPort: 5000
