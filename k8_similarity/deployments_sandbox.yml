@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: similarity-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      nlp: similarity
+  template:
+      metadata:
+        labels:
+          nlp: similarity
+      spec:
+        containers:
+          - name: similarity-container
+            image: si3mshady/similarity:v2
+            ports:
+              - containerPort: 5000
+            env:
+              - name:  ACCESS_KEY
+                value: "Dummy Data"
+              - name: SECRET_KEY
+                value: "Dummy Data"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      database: mongo
+  template:
+    metadata:
+      labels:
+        database: mongo
+    spec:
+      containers:
+        - name: mongo-pod
+          image: mongo
+          ports:
+            - containerPort: 27017
