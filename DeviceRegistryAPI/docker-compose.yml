@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  api:
+    build: ./api
+    links:
+      - mongo-service
+      - redis-service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo-service
+      - redis-service
+  mongo-service:
+    image: mongo
+    expose:
+      - "27017"
+  redis-service:
+    image: redis
+    expose:
+      - "6379"

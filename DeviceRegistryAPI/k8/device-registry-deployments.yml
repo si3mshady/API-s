@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: device-registry-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      flask: api
+  template:
+    metadata:
+      name: device-registry-pod
+      labels:
+        flask: api
+    spec:
+      containers:
+        - name: device-registry
+          image: si3mshady/device-registry-service:v1
+          ports:
+            - containerPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      mongo: nosql
+  template:
+    metadata:
+      name: mongo-pod
+      labels:
+        mongo: nosql
+    spec:
+      containers:
+        - name: mongo
+          image: mongo
+          ports:
+            - containerPort: 27017
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      redis: cache
+  template:
+    metadata:
+      name: redis-pod
+      labels:
+        redis: cache
+    spec:
+      containers:
+        - name: redis
+          image: redis
+          ports:
+            - containerPort: 6379
