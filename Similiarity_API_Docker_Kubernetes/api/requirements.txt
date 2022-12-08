@@ -2,7 +2,7 @@ aniso8601==8.0.0
 blis==0.2.4
 boto3==1.9.228
 botocore==1.12.228
-certifi==2019.9.11
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 cymem==2.0.2
